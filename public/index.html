@@ -16,6 +16,12 @@
       <button id="undo">Undo</button>
       <button id="redo">Redo</button>
     </div>
+    <div style="position: fixed; top: 90px; left: 10px; z-index: 10;">
+      <button id="shape">Shape</button>
+      <button id="text">Text</button>
+      <button id="save">Save</button>
+      <button id="load">Load</button>
+    </div>
     <canvas id="canvas"></canvas>
     <video
       style="position: fixed; bottom: 0; left: 0; z-index: 10; cursor: move;"
@@ -25,6 +31,8 @@
       autoplay
       onmousedown="dragElement(this)"
     ></video>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script>
       function dragElement(elmnt) {
       var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -55,8 +63,114 @@
         document.onmousemove = null;
       }
       }
+
+      
+  // const canvas = document.getElementById("canvas");
+  // const ctx = canvas.getContext("2d");
+  // canvas.width = window.innerWidth;
+  // canvas.height = window.innerHeight;
+
+  // canvas.addEventListener("mousedown", saveState);
+  // let shapeButton = document.getElementById("shape");
+  // let textButton = document.getElementById("text");
+  // let saveButton = document.getElementById("save");
+  // let loadButton = document.getElementById("load");
+
+  // let currentShape = null;
+  // let drawingText = false;
+
+  // shapeButton.addEventListener("click", () => {
+  //   currentShape = prompt("Enter shape (rectangle, circle):");
+  // });
+
+  // textButton.addEventListener("click", () => {
+  //   drawingText = true;
+  // });
+
+  // canvas.addEventListener("click", (e) => {
+  //   if (drawingText) {
+  //     let text = prompt("Enter text:");
+  //     if (text) {
+  //       ctx.fillText(text, e.clientX, e.clientY);
+  //       saveState();
+  //     }
+  //     drawingText = false;
+  //   } else if (currentShape) {
+  //     let startX = e.clientX;
+  //     let startY = e.clientY;
+  //     canvas.addEventListener("mouseup", (e) => {
+  //       let endX = e.clientX;
+  //       let endY = e.clientY;
+  //       if (currentShape === "rectangle") {
+  //         ctx.strokeRect(startX, startY, endX - startX, endY - startY);
+  //       } else if (currentShape === "circle") {
+  //         let radius = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+  //         ctx.beginPath();
+  //         ctx.arc(startX, startY, radius, 0, 2 * Math.PI);
+  //         ctx.stroke();
+  //       }
+  //       saveState();
+  //       currentShape = null;
+  //     }, { once: true });
+  //   }
+  // });
+
+  // saveButton.addEventListener("click", () => {
+  //   let dataURL = canvas.toDataURL();
+  //   localStorage.setItem("whiteboard", dataURL);
+  // });
+
+  // loadButton.addEventListener("click", () => {
+  //   let dataURL = localStorage.getItem("whiteboard");
+  //   if (dataURL) {
+  //     let img = new Image();
+  //     img.src = dataURL;
+  //     img.onload = () => {
+  //       ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //       ctx.drawImage(img, 0, 0);
+  //     };
+  //   }
+  // });
+
+  // function saveState() {
+  //   // Implement save state logic here
+  // }
+  //   let undoStack = [];
+  //   let redoStack = [];
+
+  //   function saveState() {
+  //     undoStack.push(canvas.toDataURL());
+  //     redoStack = [];
+  //   }
+
+  //   document.getElementById("undo").addEventListener("click", () => {
+  //     if (undoStack.length > 0) {
+  //       redoStack.push(canvas.toDataURL());
+  //       let dataURL = undoStack.pop();
+  //       let img = new Image();
+  //       img.src = dataURL;
+  //       img.onload = () => {
+  //         ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //         ctx.drawImage(img, 0, 0);
+  //       };
+  //     }
+  //   });
+
+  //   document.getElementById("redo").addEventListener("click", () => {
+  //     if (redoStack.length > 0) {
+  //       undoStack.push(canvas.toDataURL());
+  //       let dataURL = redoStack.pop();
+  //       let img = new Image();
+  //       img.src = dataURL;
+  //       img.onload = () => {
+  //         ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //         ctx.drawImage(img, 0, 0);
+  //       };
+  //     }
+  //   });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
+
