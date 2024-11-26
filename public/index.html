@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>whiteboard app</title>
+  </head>
+  <body>
+    <div style="position: fixed; top: 10px; left: 10px; z-index: 10;">
+      <button id="pen">Pen</button>
+      <button id="eraser">Eraser</button>
+      <input type="color" id="colorPicker" />
+    </div>
+    <div style="position: fixed; top: 50px; left: 10px; z-index: 10;">
+      <button id="undo">Undo</button>
+      <button id="redo">Redo</button>
+    </div>
+    <canvas id="canvas"></canvas>
+    <video
+      style="position: fixed; bottom: 0; left: 0; z-index: 10; cursor: move;"
+      id="test"
+      width="400"
+      height="300"
+      autoplay
+      onmousedown="dragElement(this)"
+    ></video>
+    <script>
+      function dragElement(elmnt) {
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      elmnt.onmousedown = dragMouseDown;
+
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      }
+
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
